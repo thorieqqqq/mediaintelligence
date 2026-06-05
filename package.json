@@ -1,0 +1,9 @@
+{
+  "name": "aegis-risk-intelligence",
+  "version": "1.0.0",
+  "description": "AEGIS Brand Listening & Risk Intelligence Dashboard",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  }
+}
