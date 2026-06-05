@@ -1,0 +1,19 @@
+{
+  "name": "media-intelligence",
+  "version": "1.0.0",
+  "description": "AEGIS Brand Listening & Risk Intelligence Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build successful'",
+    "start": "echo 'Starting application'",
+    "dev": "echo 'Development mode'"
+  },
+  "keywords": [
+    "media",
+    "intelligence",
+    "dashboard",
+    "risk-analysis"
+  ],
+  "author": "",
+  "license": "MIT"
+}
