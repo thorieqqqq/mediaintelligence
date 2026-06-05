@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGIS // Brand Listening & Risk Intelligence Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans for premium tech feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom scrollbar for modern sleek feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        /* Subtle glowing animations */
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body class="h-full text-slate-100 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Brand & Specialist Tag -->
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        AEGIS <span class="text-indigo-400 font-light text-sm tracking-widest ml-1 uppercase">Risk Intel</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 font-medium">Cloudflare Pages Specialist Portfolio Showcase</p>
+                </div>
+            </div>
+
+            <!-- Header Status & Badges -->
+            <div class="flex items-center gap-3 flex-wrap">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Ready to Deploy on Pages
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    OpenRouter Enabled
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT: Control Panel (Inputs) -->
+        <section class="lg:col-span-5 bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm shadow-xl space-y-6">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                    Analysis Control Center
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Configure your brand analytics input pipeline</p>
+            </div>
+
+            <!-- Form -->
+            <div class="space-y-4">
+                <!-- Topic or Brand Name -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" for="brandName">Topic / Brand Name</label>
+                    <input type="text" id="brandName" placeholder="e.g., ApexCloud, SustainaBottle" 
+                        class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                </div>
+
+                <!-- Data Source Selector -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" for="dataSource">Data Source</label>
+                    <div class="relative">
+                        <select id="dataSource" 
+                            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                            <option value="X/Twitter Feed">X/Twitter Analytics Feed</option>
+                            <option value="Reddit Discussion Threads">Reddit Community Threads</option>
+                            <option value="Customer Support Desk">Support Desk & CRM Logs</option>
+                            <option value="News & Press Mentions">Global Press & News Mentions</option>
+                            <option value="Multi-Source Consolidation">Consolidated Multi-Source Raw Feed</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Input Textarea -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider" for="mediaData">Raw Media Data / Mentions</label>
+                        <span id="charCount" class="text-[10px] text-slate-500">0 characters</span>
+                    </div>
+                    <textarea id="mediaData" rows="6" placeholder="Paste social media mentions, blog posts, news snippets, or user reviews here..." 
+                        class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none"></textarea>
+                </div>
+
+                <!-- OpenRouter Settings Expandable -->
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-950/20">
+                    <button type="button" onclick="toggleApiSettings()" class="w-full flex justify-between items-center px-4 py-3 bg-slate-950/40 hover:bg-slate-950/60 transition-colors">
+                        <span class="text-xs font-bold text-slate-300 tracking-wider uppercase flex items-center gap-2">
+                            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                            </svg>
+                            AI Engine Settings (Optional API Key)
+                        </span>
+                        <svg id="chevronIcon" class="w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="apiSettingsPanel" class="hidden p-4 space-y-4 border-t border-slate-800 bg-slate-950/40">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider" for="apiKey">OpenRouter API Key</label>
+                                <span class="text-[9px] text-indigo-400 font-semibold uppercase">Secured locally</span>
+                            </div>
+                            <div class="relative">
+                                <input type="password" id="apiKey" placeholder="sk-or-v1-..." 
+                                    class="w-full bg-slate-950 border border-slate-850 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-700 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                                <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-300">
+                                    <svg id="eyeIcon" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-[10px] text-slate-500 mt-1">If blank, our smart simulator will instantly parse details in premium detail.</p>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1" for="aiModel">Active AI Model</label>
+                            <input type="text" id="aiModel" value="openrouter/free" 
+                                class="w-full bg-slate-950 border border-slate-850 rounded-lg px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Triggers -->
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <button type="button" onclick="loadSample()" 
+                        class="px-4 py-3 bg-slate-950 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold rounded-xl text-sm transition-all hover:bg-slate-900 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        Load Sample
+                    </button>
+                    
+                    <button type="button" onclick="startAnalysis()" id="btnAnalyze"
+                        class="px-4 py-3 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/10 glow-button flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        Analyze Intel
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT: Dashboard Analytics Display -->
+        <section class="lg:col-span-7 flex flex-col h-full min-h-[500px]">
+            
+            <!-- Default Placeholder / Empty State -->
+            <div id="emptyDashboardState" class="flex-grow flex flex-col items-center justify-center text-center p-8 border border-dashed border-slate-800 rounded-2xl bg-slate-900/10">
+                <div class="h-16 w-16 bg-slate-900/60 border border-slate-800 rounded-2xl flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1120.945 13H11V3.055z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-300">Awaiting Brand Intelligence Inputs</h3>
+                <p class="text-sm text-slate-500 max-w-sm mt-2">Enter data in the panel or click "Load Sample Data" to watch the Aegis Intelligence dashboard assemble instantly.</p>
+            </div>
+
+            <!-- Loader / Spinning Simulation State -->
+            <div id="loaderState" class="hidden flex-grow flex-col items-center justify-center text-center p-8 border border-slate-800 rounded-2xl bg-slate-950/40">
+                <div class="relative w-16 h-16 mb-4">
+                    <div class="absolute inset-0 rounded-full border-4 border-slate-800"></div>
+                    <div class="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-wide" id="loaderMessage">Assembling Threat Intelligence...</h3>
+                <p class="text-xs text-slate-400 mt-1 max-w-xs">Connecting to secure AI engine, processing raw media vectors, and scoring risk probabilities.</p>
+            </div>
+
+            <!-- REALIZED DASHBOARD CORE (Hidden by Default) -->
+            <div id="dashboardCore" class="hidden space-y-6">
+                
+                <!-- TOP HEADER BAR: Active Topic & Copy Report -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-900/30 border border-slate-800/80 rounded-xl p-4 gap-4">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-indigo-400">Analysis Completed</span>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span id="displayTopic">Brand Name</span>
+                            <span class="text-xs font-normal text-slate-500" id="displaySource">via Source</span>
+                        </h3>
+                    </div>
+                    <button type="button" onclick="copyReportToClipboard()" 
+                        class="w-full sm:w-auto px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 font-bold rounded-lg text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Intelligence Report
+                    </button>
+                </div>
+
+                <!-- KEY METRICS ROW (Sentiment & Risk Level) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Sentiment Card -->
+                    <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden flex flex-col justify-between h-48">
+                        <div class="absolute right-0 top-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">Sentiment Index</h4>
+                                <span class="text-2xl font-black mt-1 block" id="txtSentimentLabel">Positive</span>
+                            </div>
+                            <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Visual Gauge Representation -->
+                        <div class="space-y-2">
+                            <div class="w-full bg-slate-950 rounded-full h-3 overflow-hidden p-[2px] border border-slate-850">
+                                <div id="sentimentProgressBar" class="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 rounded-full transition-all duration-1000" style="width: 50%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-500 font-bold">
+                                <span>NEGATIVE (-100)</span>
+                                <span id="txtSentimentScore" class="text-slate-300">Score: 0</span>
+                                <span>POSITIVE (+100)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Level Badge Card -->
+                    <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden flex flex-col justify-between h-48">
+                        <div class="absolute right-0 top-0 w-24 h-24 bg-rose-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">Risk Exposure</h4>
+                                <span class="text-xs font-medium text-slate-500 mt-0.5 block">AI Threat Evaluation</span>
+                            </div>
+                            <div class="p-2 bg-rose-500/10 rounded-lg text-rose-400" id="riskCardIconContainer">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Heavy Visual Badge Area -->
+                        <div class="flex items-center gap-4 py-2">
+                            <div id="riskLevelBadge" class="px-5 py-2.5 rounded-xl border text-lg font-black tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                MINIMAL
+                            </div>
+                            <div class="text-xs text-slate-400 leading-relaxed" id="riskDescription">
+                                System parameters normal. Immediate action is not recommended.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KEY TAKEAWAY callout -->
+                <div class="p-5 bg-indigo-500/5 border border-indigo-500/20 rounded-2xl relative">
+                    <span class="absolute -top-2.5 left-4 px-2 py-0.5 bg-slate-950 border border-indigo-500/30 rounded-md text-[9px] font-bold text-indigo-400 uppercase tracking-widest">Key Takeaway</span>
+                    <p class="text-sm font-semibold text-slate-200 italic" id="txtKeyInsight">
+                        "The primary consensus is high approval on pricing structure, but a rising backlog in client ticket response is generating friction on Reddit."
+                    </p>
+                </div>
+
+                <!-- TOP THEMES (Visual Bar Chart) -->
+                <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-4 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Discussion Themes & Frequency
+                    </h4>
+                    <!-- Dynamic Theme Containers -->
+                    <div id="themeFrequencyChart" class="space-y-4">
+                        <!-- Bars built dynamically via Javascript -->
+                    </div>
+                </div>
+
+                <!-- OPPORTUNITIES & CONCERNS COMPARISON -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Opportunities (Green Theme) -->
+                    <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-5">
+                        <h4 class="text-xs font-bold text-emerald-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Opportunities to Leverage
+                        </h4>
+                        <ul class="space-y-2 text-xs text-slate-300" id="listOpportunities">
+                            <!-- Items populated dynamically -->
+                        </ul>
+                    </div>
+
+                    <!-- Concerns (Amber/Red Theme) -->
+                    <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-5">
+                        <h4 class="text-xs font-bold text-amber-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                            </svg>
+                            Core Risks & Audience Concerns
+                        </h4>
+                        <ul class="space-y-2 text-xs text-slate-300" id="listConcerns">
+                            <!-- Items populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RECOMMENDED ACTIONS & PRIORITY BADGES -->
+                <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-4 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Prescriptive Incident Playbook
+                    </h4>
+                    <div id="actionsContainer" class="space-y-3">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+
+                <!-- EXECUTIVE SUMMARY -->
+                <div class="bg-slate-905 border border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">Executive Threat Summary</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed font-light" id="txtExecutiveSummary">
+                        Summary analysis loading...
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Toast Notifications -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-3 bg-indigo-950 border border-indigo-500/45 px-5 py-3 rounded-xl shadow-2xl">
+        <span class="p-1 bg-indigo-500/20 text-indigo-400 rounded-lg">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </span>
+        <span id="toastMessage" class="text-xs font-bold text-indigo-200">System State Synchronized</span>
+    </div>
+
+    <!-- Footer Credit Line & Tech Badges -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 px-4 text-center mt-12 space-y-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div>
+                &copy; 2026 Aegis Risk Intelligence Systems. Developed for high speed deployment on Cloudflare Pages.
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+                <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-850 hover:text-slate-300 transition-colors">Cloudflare Pages Specialist</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-850 hover:text-slate-300 transition-colors">OpenRouter AI Pipeline</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-850 hover:text-slate-300 transition-colors">Vanilla JS UI Framework</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Engine -->
+    <script>
+        // Core State Store
+        const appState = {
+            activeTopic: "",
+            activeSource: "",
+            currentReport: null
+        };
+
+        // UI Collapsible State
+        function toggleApiSettings() {
+            const panel = document.getElementById("apiSettingsPanel");
+            const chevron = document.getElementById("chevronIcon");
+            if (panel.classList.contains("hidden")) {
+                panel.classList.remove("hidden");
+                chevron.classList.add("rotate-180");
+            } else {
+                panel.classList.add("hidden");
+                chevron.classList.remove("rotate-180");
+            }
+        }
+
+        // Toggle API Key view masking
+        function togglePasswordVisibility() {
+            const apiField = document.getElementById("apiKey");
+            if (apiField.type === "password") {
+                apiField.type = "text";
+            } else {
+                apiField.type = "password";
+            }
+        }
+
+        // Update character counter in real time
+        document.getElementById("mediaData").addEventListener("input", function() {
+            document.getElementById("charCount").innerText = `${this.value.length} characters`;
+        });
+
+        // Smart Toast Notification System
+        function triggerToast(message) {
+            const toast = document.getElementById("toastNotification");
+            const msgSpan = document.getElementById("toastMessage");
+            msgSpan.innerText = message;
+            
+            toast.classList.remove("translate-y-12", "opacity-0", "pointer-events-none");
+            
+            setTimeout(() => {
+                toast.classList.add("translate-y-12", "opacity-0", "pointer-events-none");
+            }, 3000);
+        }
+
+        // Preloaded Crisp Scenarios for Instant Showcase
+        const SAMPLE_DATASETS = [
+            {
+                brand: "Apex-Cloud Inc.",
+                source: "Consolidated Multi-Source Raw Feed",
+                data: `User_101: Absolute nightmare trying to access my database files today. Service is entirely down.
+TechBlogger: ApexCloud reports major node failures. Seems US East cluster is dead. 3 hours downtime and counting. No updates on status page.
+CustomerCare: We are highly impacted. We might seek an SLA breach payout. They need to address transparency.
+Sysadmin_Reddit: "We're losing client confidence every minute. Moving databases is a pain but we can't sustain this. APEX uptime claims are a complete joke."`,
+                analysis: {
+                    sentimentScore: -82,
+                    sentimentLabel: "Highly Negative",
+                    riskLevel: "Critical",
+                    riskDescription: "Severe SLA vulnerabilities detected. Churn vector accelerating actively.",
+                    keyInsight: "Critical system outage with severe client transparency lag is sparking active SLA compensation demands and migration plans.",
+                    themes: [
+                        { name: "Infrastructure Stability", percentage: 95 },
+                        { name: "Corporate Communication", percentage: 80 },
+                        { name: "Contractual Compensation", percentage: 65 }
+                    ],
+                    opportunities: [
+                        "Proactively trigger global discount credits to neutralize legal breaches",
+                        "Leverage technical transparency by publishing raw post-mortem timelines immediately"
+                    ],
+                    concerns: [
+                        "Customers actively detailing competitor cloud migration paths on Reddit",
+                        "Substantial threat of legal class actions regarding standard SLA warranties"
+                    ],
+                    actions: [
+                        { action: "Publish complete live outage post-mortem within the next 2 hours.", priority: "High" },
+                        { action: "Instruct account managers to personally execute executive recovery check-ins with top-tier partners.", priority: "High" },
+                        { action: "Configure auto-scaling status check nodes to avoid false green state reports.", priority: "Medium" }
+                    ],
+                    summary: "Apex-Cloud's infrastructure failure has generated severe immediate damage to institutional reliability. The failure is exacerbated by delayed external corporate messaging. Remediation demands executive transparency and automated SLA adjustments to avoid permanent customer migration."
+                }
+            },
+            {
+                brand: "SustainaBottle",
+                source: "X/Twitter Analytics Feed",
+                data: `@EcoWhale: Absolutely loving the new biological plant-based cap on @SustainaBottle! It naturally degrades within months! Perfect!
+@GreenReviewer: Tested SustainaBottle and it survived 3 massive drops! Finally, plastic-free design meets true utility!
+@FastFashionLover: They use eco-caps, but what is their carbon footprint on shipping? Needs audit.
+@MinimalistLiving: Simple design, clean aesthetic. Fits in standard cup holders. Best bottle on the market easily!`,
+                analysis: {
+                    sentimentScore: 78,
+                    sentimentLabel: "Extremely Positive",
+                    riskLevel: "Minimal",
+                    riskDescription: "Safe brand dynamics. Ideal moment to scale promotional budgets.",
+                    keyInsight: "The biodegradable cap innovation is highly prized. Product design meets drop-test proof criteria brilliantly.",
+                    themes: [
+                        { name: "Ecological Engineering", percentage: 90 },
+                        { name: "Industrial Durability", percentage: 75 },
+                        { name: "Supply Chain Auditing", percentage: 40 }
+                    ],
+                    opportunities: [
+                        "Launch user-generated content video campaign showcasing extreme structural drop-tests",
+                        "Capitalize on high eco-credibility by releasing transparent carbon offsets for delivery corridors"
+                    ],
+                    concerns: [
+                        "Early inquiries regarding shipping emissions could build if left unaddressed",
+                        "Slight product backlog warnings on Amazon due to rapid, high-demand sales volume"
+                    ],
+                    actions: [
+                        { action: "Promote carbon neutrality metrics on product landing pages.", priority: "Medium" },
+                        { action: "Draft secondary biodegradable product categories (e.g. travel lunch boxes) while design is viral.", priority: "Low" }
+                    ],
+                    summary: "SustainaBottle is experiencing an exceptionally successful promotional cycle regarding its biodegradable cap engineering. The underlying risk remains minimal, focusing almost entirely on scalability issues and answering modern supply chain audit requests."
+                }
+            },
+            {
+                brand: "FitTrack Pro App",
+                source: "Customer Support Desk",
+                data: `Ticket #8839: Ever since the update to version 4.2.1, my steps aren't syncing with Apple Health. Please fix!
+Ticket #8845: App crash on startup on Android 14. Tried uninstalling, didn't work.
+Review: I love the coaching tips but data synchronization bugs make tracking my metrics impossible.
+AppStoreReview: Update completely ruined the experience. Bluetooth reconnect is needed twice daily.`,
+                analysis: {
+                    sentimentScore: -24,
+                    sentimentLabel: "Moderately Critical",
+                    riskLevel: "Medium",
+                    riskDescription: "Software regression impacts fundamental features. App store ratings vulnerable.",
+                    keyInsight: "The 4.2.1 release contains functional Bluetooth sync regression causing severe user friction and lowering App Store ratings.",
+                    themes: [
+                        { name: "OS/Hardware Integration", percentage: 85 },
+                        { name: "Application Performance", percentage: 65 },
+                        { name: "Content-driven Coaching Value", percentage: 50 }
+                    ],
+                    opportunities: [
+                        "Highlight high-value integrated trainer coaching content to retain irritated non-syncing users",
+                        "Leverage active beta channels to validate incoming hotfixes directly before global publishing"
+                    ],
+                    concerns: [
+                        "Downward rating pressure on main app stores could permanently damage customer acquisition",
+                        "Customer service channels are seeing high ticket backlogs causing prolonged wait times"
+                    ],
+                    actions: [
+                        { action: "Roll back version 4.2.1 or release critical hotfix v4.2.2.", priority: "High" },
+                        { action: "Deploy immediate macro-responses on support desk to ease agent strain.", priority: "Medium" },
+                        { action: "Initiate app store review management plan replying directly to 1-star bug reviews.", priority: "Low" }
+                    ],
+                    summary: "FitTrack Pro is facing system synchronization errors caused directly by its latest patch release. Although core lifestyle content remains valued, functional failures in step-syncing must be prioritized to avoid localized attrition."
+                }
+            }
+        ];
+
+        let sampleIndex = 0;
+
+        // Auto Load Sample Function
+        function loadSample() {
+            const currentSample = SAMPLE_DATASETS[sampleIndex];
+            
+            document.getElementById("brandName").value = currentSample.brand;
+            document.getElementById("dataSource").value = currentSample.source;
+            document.getElementById("mediaData").value = currentSample.data;
+            document.getElementById("charCount").innerText = `${currentSample.data.length} characters`;
+            
+            triggerToast(`Preloaded: ${currentSample.brand} Scenario Data`);
+            
+            // Increment index for next click
+            sampleIndex = (sampleIndex + 1) % SAMPLE_DATASETS.length;
+        }
+
+        // Exponential backoff for API connections
+        async function fetchWithBackoff(url, options, retries = 5, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    throw new Error(`HTTP Error Status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                if (retries <= 1) throw error;
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithBackoff(url, options, retries - 1, delay * 2);
+            }
+        }
+
+        // Formulate intelligence pipeline processing
+        async function startAnalysis() {
+            const topic = document.getElementById("brandName").value.trim();
+            const source = document.getElementById("dataSource").value;
+            const textData = document.getElementById("mediaData").value.trim();
+            const apiKey = document.getElementById("apiKey").value.trim();
+            const model = document.getElementById("aiModel").value.trim() || "openrouter/free";
+
+            if (!topic || !textData) {
+                triggerToast("Validation Failed: Enter Topic & Media Data first.");
+                return;
+            }
+
+            // UI Transitions
+            const emptyState = document.getElementById("emptyDashboardState");
+            const loaderState = document.getElementById("loaderState");
+            const dashboardCore = document.getElementById("dashboardCore");
+            
+            emptyState.classList.add("hidden");
+            dashboardCore.classList.add("hidden");
+            loaderState.classList.remove("hidden");
+            
+            document.getElementById("loaderMessage").innerText = `Analyzing "${topic}" Data...`;
+
+            // Case A: Real OpenRouter API Key Present
+            if (apiKey !== "") {
+                try {
+                    const systemPrompt = `You are a professional brand protection specialist and senior data analyst. You perform structural brand listening, risk analysis, and generate comprehensive threat metrics.
+                    
+                    Analyze the user's provided media inputs and return your absolute final analysis in structural, compliant JSON format.
+                    Do NOT wrap inside markdown blocks other than clean pure JSON, and strictly conform to the schema:
+                    {
+                      "sentimentScore": <Number between -100 and +100>,
+                      "sentimentLabel": "<Positive, Neutral, Highly Negative, etc.>",
+                      "riskLevel": "<Minimal, Low, Medium, High, or Critical>",
+                      "riskDescription": "<Slight description explaining physical/structural vulnerability factors>",
+                      "keyInsight": "<A single powerful, highly specific sentence synthesizing the major threat pattern>",
+                      "themes": [
+                        { "name": "<Theme Name>", "percentage": <Frequency score 1-100> },
+                        { "name": "<Theme Name 2>", "percentage": <Frequency score 1-100> }
+                      ],
+                      "opportunities": ["<Opportunity bullet 1>", "<Opportunity bullet 2>"],
+                      "concerns": ["<Concern bullet 1>", "<Concern bullet 2>"],
+                      "actions": [
+                        { "action": "<Playbook directive>", "priority": "<High, Medium, or Low>" }
+                      ],
+                      "executiveSummary": "<A cohesive professional brand risk evaluation paragraph>"
+                    }`;
+
+                    const payload = {
+                        model: model,
+                        messages: [
+                            { role: "system", content: systemPrompt },
+                            { role: "user", content: `BRAND: "${topic}"\nSOURCE: "${source}"\nDATA:\n${textData}` }
+                        ]
+                    };
+
+                    const response = await fetchWithBackoff("https://openrouter.ai/api/v1/chat/completions", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${apiKey}`,
+                            "Content-Type": "application/json",
+                            "HTTP-Referer": "https://cloudflare-pages-portfolio.aegis", 
+                            "X-Title": "Aegis Risk Intelligence Portfolio"
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const rawText = response.choices?.[0]?.message?.content;
+                    if (!rawText) {
+                        throw new Error("No payload content received from AI endpoint.");
+                    }
+
+                    // Clean JSON output if AI wrapped it in markdown code blocks
+                    const cleanedJSONText = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
+                    const parsedReport = JSON.parse(cleanedJSONText);
+
+                    renderDashboard(topic, source, parsedReport);
+                    triggerToast("AI Risk Models Updated Successfully!");
+
+                } catch (err) {
+                    console.error(err);
+                    triggerToast("API Failed: Defaulting to local simulator engine...");
+                    runSimulatedEngine(topic, source, textData);
+                }
+            } else {
+                // Case B: Key empty -> Run Premium Intelligent Simulation
+                // 1.5s visual loader for authentic telemetry feeling
+                setTimeout(() => {
+                    runSimulatedEngine(topic, source, textData);
+                }, 1200);
+            }
+        }
+
+        // High-Fidelity Intelligent Local Simulator
+        function runSimulatedEngine(topic, source, textData) {
+            // Check if user input matches one of our default scenarios, load its clean mock data
+            const matchedSample = SAMPLE_DATASETS.find(s => s.brand.toLowerCase() === topic.toLowerCase() || textData.includes(s.brand));
+            
+            if (matchedSample) {
+                renderDashboard(topic, source, matchedSample.analysis);
+            } else {
+                // Generate Dynamic Mock Data based on custom inputs dynamically
+                const negativeKeywords = ["down", "crash", "error", "horrible", "sucks", "slow", "terrible", "issue", "bug", "scam"];
+                let negativeMatchCount = 0;
+                negativeKeywords.forEach(word => {
+                    const regex = new RegExp(word, "gi");
+                    const matches = textData.match(regex);
+                    if (matches) negativeMatchCount += matches.length;
+                });
+
+                let score = 15; // default neutral
+                let label = "Neutral / Stable";
+                let risk = "Low";
+                let riskDesc = "System benchmarks are stable with low external volatility indicators.";
+
+                if (negativeMatchCount > 3) {
+                    score = -65;
+                    label = "Predominantly Negative";
+                    risk = "High";
+                    riskDesc = "Target vectors show sustained structural friction. High warning triggers.";
+                } else if (negativeMatchCount > 1) {
+                    score = -15;
+                    label = "Mildly Negative / Volatile";
+                    risk = "Medium";
+                    riskDesc = "Localized operational issues are generating visible negative clusters.";
+                } else if (textData.length > 5) {
+                    score = 60;
+                    label = "Sustained Positive Support";
+                    risk = "Minimal";
+                    riskDesc = "Favorable organic market indicators. Baseline systemic resilience is high.";
+                }
+
+                const syntheticAnalysis = {
+                    sentimentScore: score,
+                    sentimentLabel: label,
+                    riskLevel: risk,
+                    riskDescription: riskDesc,
+                    keyInsight: `Continuous feedback pipeline tracking demonstrates key concern focusing heavily on customer interface consistency.`,
+                    themes: [
+                        { name: "User Interface Experience", percentage: 80 },
+                        { name: "Feature Reliability", percentage: 65 },
+                        { name: "Customer Success Strategy", percentage: 50 }
+                    ],
+                    opportunities: [
+                        "Reposition digital communications to answer active customer feedback immediately.",
+                        "Publish dynamic user guides detailing hidden capabilities noticed during this research cycle."
+                    ],
+                    concerns: [
+                        "Minor user friction has localized risk of converting into broader social media churn metrics.",
+                        "Delaying patch announcements creates an information vacuum for competitor marketing teams."
+                    ],
+                    actions: [
+                        { action: "Direct QA and design departments to cross-examine customer support desks.", priority: "High" },
+                        { action: "Consolidate active complaints and deploy targeted direct email reach outs.", priority: "Medium" },
+                        { action: "Set internal tracking parameters to trigger automatic escalation alerts.", priority: "Low" }
+                    ],
+                    summary: `The organic audience feedback compiled for ${topic} indicates variable engagement states. Primary functional pathways are valued, but peripheral friction points surrounding updates create risk vectors. Swift resolution of the high priority actions will stabilize the system's baseline parameters efficiently.`
+                };
+
+                renderDashboard(topic, source, syntheticAnalysis);
+            }
+            
+            triggerToast("Risk Architecture Telemetry Realized");
+        }
+
+        // Render Report onto Dashboard Components
+        function renderDashboard(topic, source, report) {
+            appState.activeTopic = topic;
+            appState.activeSource = source;
+            appState.currentReport = report;
+
+            // Elements references
+            document.getElementById("loaderState").classList.add("hidden");
+            document.getElementById("dashboardCore").classList.remove("hidden");
+
+            // Header labels
+            document.getElementById("displayTopic").innerText = topic;
+            document.getElementById("displaySource").innerText = `via ${source}`;
+
+            // Sentiment mapping
+            document.getElementById("txtSentimentLabel").innerText = report.sentimentLabel;
+            document.getElementById("txtSentimentScore").innerText = `Score: ${report.sentimentScore >= 0 ? '+' : ''}${report.sentimentScore}`;
+            
+            // Adjust progress bar percentage visual: Map -100 to +100 range onto 0% to 100% width
+            const mappedPercentage = ((report.sentimentScore + 100) / 200) * 100;
+            const sBar = document.getElementById("sentimentProgressBar");
+            sBar.style.width = `${mappedPercentage}%`;
+
+            // Sentiment specific colors
+            if (report.sentimentScore < -30) {
+                sBar.className = "h-full bg-gradient-to-r from-rose-600 to-amber-500 rounded-full transition-all duration-1000";
+            } else if (report.sentimentScore < 20) {
+                sBar.className = "h-full bg-gradient-to-r from-amber-500 to-indigo-500 rounded-full transition-all duration-1000";
+            } else {
+                sBar.className = "h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full transition-all duration-1000";
+            }
+
+            // Risk badge customization
+            const riskBadge = document.getElementById("riskLevelBadge");
+            const riskIconContainer = document.getElementById("riskCardIconContainer");
+            const rDesc = document.getElementById("riskDescription");
+            rDesc.innerText = report.riskDescription;
+
+            let badgeColorClass = "";
+            let dotColorClass = "";
+            let iconSvg = "";
+
+            switch (report.riskLevel.toUpperCase()) {
+                case "CRITICAL":
+                    badgeColorClass = "bg-rose-500/10 text-rose-500 border-rose-500/40 shadow-lg shadow-rose-500/10 animate-pulse";
+                    dotColorClass = "bg-rose-500";
+                    iconSvg = `<svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+                    break;
+                case "HIGH":
+                    badgeColorClass = "bg-red-500/10 text-red-400 border-red-500/30";
+                    dotColorClass = "bg-red-400";
+                    iconSvg = `<svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+                    break;
+                case "MEDIUM":
+                    badgeColorClass = "bg-amber-500/10 text-amber-400 border-amber-500/30";
+                    dotColorClass = "bg-amber-400";
+                    iconSvg = `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+                    break;
+                case "LOW":
+                    badgeColorClass = "bg-blue-500/10 text-blue-400 border-blue-500/30";
+                    dotColorClass = "bg-blue-400";
+                    iconSvg = `<svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                    break;
+                case "MINIMAL":
+                default:
+                    badgeColorClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+                    dotColorClass = "bg-emerald-400";
+                    iconSvg = `<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`;
+                    break;
+            }
+
+            riskBadge.className = `px-5 py-2.5 rounded-xl border text-lg font-black tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-2 ${badgeColorClass}`;
+            riskBadge.innerHTML = `<span class="w-3 h-3 rounded-full ${dotColorClass}"></span> ${report.riskLevel}`;
+            riskIconContainer.innerHTML = iconSvg;
+
+            // Key Takeaway
+            document.getElementById("txtKeyInsight").innerText = `"${report.keyInsight}"`;
+
+            // Custom SVG & CSS Bar Charts - Top Themes
+            const themesContainer = document.getElementById("themeFrequencyChart");
+            themesContainer.innerHTML = "";
+            report.themes.forEach(theme => {
+                const themeElement = document.createElement("div");
+                themeElement.className = "space-y-1.5";
+                themeElement.innerHTML = `
+                    <div class="flex justify-between text-xs">
+                        <span class="font-bold text-slate-300">${theme.name}</span>
+                        <span class="font-black text-indigo-400">${theme.percentage}%</span>
+                    </div>
+                    <div class="w-full bg-slate-950 rounded-full h-2.5 p-[1px] border border-slate-900">
+                        <div class="h-full bg-indigo-500 rounded-full transition-all duration-1000" style="width: ${theme.percentage}%;"></div>
+                    </div>
+                `;
+                themesContainer.appendChild(themeElement);
+            });
+
+            // Opportunities mapping
+            const optContainer = document.getElementById("listOpportunities");
+            optContainer.innerHTML = "";
+            report.opportunities.forEach(opt => {
+                const li = document.createElement("li");
+                li.className = "flex items-start gap-2.5 py-1";
+                li.innerHTML = `
+                    <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>${opt}</span>
+                `;
+                optContainer.appendChild(li);
+            });
+
+            // Concerns mapping
+            const conContainer = document.getElementById("listConcerns");
+            conContainer.innerHTML = "";
+            report.concerns.forEach(con => {
+                const li = document.createElement("li");
+                li.className = "flex items-start gap-2.5 py-1";
+                li.innerHTML = `
+                    <svg class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <span>${con}</span>
+                `;
+                conContainer.appendChild(li);
+            });
+
+            // Recommended actions with Priority Badges
+            const actContainer = document.getElementById("actionsContainer");
+            actContainer.innerHTML = "";
+            report.actions.forEach((act, index) => {
+                let prioBadgeClass = "";
+                switch (act.priority.toLowerCase()) {
+                    case "high":
+                        prioBadgeClass = "bg-rose-500/10 text-rose-400 border-rose-500/30";
+                        break;
+                    case "medium":
+                        prioBadgeClass = "bg-amber-500/10 text-amber-400 border-amber-500/30";
+                        break;
+                    case "low":
+                    default:
+                        prioBadgeClass = "bg-sky-500/10 text-sky-400 border-sky-500/30";
+                        break;
+                }
+
+                const card = document.createElement("div");
+                card.className = "flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-950/50 hover:bg-slate-950 border border-slate-900 rounded-xl p-4 gap-3 transition-colors";
+                card.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 rounded-lg bg-slate-900 text-slate-500 font-bold text-xs shrink-0">${index + 1}</span>
+                        <p class="text-xs text-slate-200 font-medium leading-relaxed">${act.action}</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border shrink-0 ${prioBadgeClass}">${act.priority} Priority</span>
+                `;
+                actContainer.appendChild(card);
+            });
+
+            // Executive summary
+            document.getElementById("txtExecutiveSummary").innerText = report.executiveSummary;
+        }
+
+        // Action D: Copy Generated Report to Clipboard (Highly formatted Markdown)
+        function copyReportToClipboard() {
+            if (!appState.currentReport) {
+                triggerToast("Report empty. Analyze data first.");
+                return;
+            }
+
+            const rep = appState.currentReport;
+            
+            let markdown = `=========================================
+AEGIS BRAND INTELLIGENCE REPORT
+=========================================
+BRAND: ${appState.activeTopic}
+SOURCE: ${appState.activeSource}
+TIMESTAMP: ${new Date().toISOString()}
+
+[1] KEY METRICS
+-----------------------------------------
+Sentiment Index: ${rep.sentimentLabel} (Score: ${rep.sentimentScore})
+Risk Exposure Level: ${rep.riskLevel}
+Summary Assessment: ${rep.riskDescription}
+
+[2] PRIMARY INSIGHT
+-----------------------------------------
+"${rep.keyInsight}"
+
+[3] DISCUSSION THEMES
+-----------------------------------------
+${rep.themes.map(t => `- ${t.name}: ${t.percentage}%`).join('\n')}
+
+[4] CONTEXTUAL AUDIENCE PERSPECTIVES
+-----------------------------------------
+Opportunities:
+${rep.opportunities.map(o => `  * [Gain] ${o}`).join('\n')}
+
+Concerns & Issues:
+${rep.concerns.map(c => `  * [Risk] ${c}`).join('\n')}
+
+[5] PRESCRIPTIVE PLAYBOOK ACTIONS
+-----------------------------------------
+${rep.actions.map((a, i) => `${i+1}. [${a.priority} Priority] ${a.action}`).join('\n')}
+
+[6] EXECUTIVE SUMMARY
+-----------------------------------------
+${rep.executiveSummary}
+
+=========================================
+Generated via Aegis Risk Intel System. ready for Cloudflare Pages.`;
+
+            // Robust IFrame-safe Clipboard fallback
+            const textArea = document.createElement("textarea");
+            textArea.value = markdown;
+            textArea.style.position = "fixed";  // Avoid scrolling to bottom
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    triggerToast("Full Report Copied to Clipboard!");
+                } else {
+                    triggerToast("Clipboard Access Denied.");
+                }
+            } catch (err) {
+                console.error('Fallback copy strategy failed', err);
+                triggerToast("Copy error. Try manual text selection.");
+            }
+
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
